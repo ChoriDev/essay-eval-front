@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import submitIcon from "../images/submitIcon.png";
 
 function Home() {
   const [letterCount, setLetterCount] = useState(0);
@@ -25,6 +26,7 @@ function Home() {
         <div>현재 글자수: {letterCount} / 1000</div>
         <div className="submitBtnBox">
           <Button variant="primary" type="submit">
+            <img src={submitIcon} alt="로고" />
             제출하기
           </Button>
         </div>
