@@ -1,5 +1,8 @@
 .container {
-  padding: 24px;
+  padding-top: 24px;
+  padding-right: 36px;
+  padding-bottom: 24px;
+  padding-left: 36px;
 }
 
 .textBox {
