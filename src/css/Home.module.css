@@ -1,0 +1,41 @@
+.container {
+  padding: 24px;
+}
+
+.textBox {
+  margin-bottom: 8px;
+}
+
+.textBox .textArea {
+  background-color: #f2f8fe;
+  border-color: gray;
+}
+
+.letterCountBox {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.letterCountBox .letterCount {
+  margin-bottom: 8px;
+}
+
+.submitBtnBox {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submitBtnBox button {
+  color: black;
+  background-color: #c7e1f9;
+  border-color: #c7e1f9;
+  border-radius: 16px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+}
+
+.submitBtnBox img {
+  width: 48px;
+  margin: 0;
+}
