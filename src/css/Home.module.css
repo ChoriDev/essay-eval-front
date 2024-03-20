@@ -23,12 +23,15 @@
   margin-bottom: 8px;
 }
 
-.submitBtnBox {
+.btnBox {
   display: flex;
   justify-content: flex-end;
 }
 
-.submitBtnBox button {
+.btnBox button {
+  height: 48px;
+  display: flex;
+  align-items: center;
   color: black;
   background-color: #c7e1f9;
   border-color: #c7e1f9;
@@ -38,7 +41,6 @@
   padding-left: 2px;
 }
 
-.submitBtnBox img {
+.btnBox img {
   width: 48px;
-  margin: 0;
 }
