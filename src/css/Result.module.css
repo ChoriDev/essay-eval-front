@@ -6,7 +6,7 @@
 }
 
 .textBox {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .textBox .textArea {
@@ -16,7 +16,8 @@
 
 .btnContainer {
   display: flex;
-  gap: 4px;
+  justify-content: flex-end;
+  gap: 8px;
 }
 
 .btnBox {
