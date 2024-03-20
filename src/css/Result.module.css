@@ -1,0 +1,40 @@
+.container {
+  padding-top: 24px;
+  padding-right: 36px;
+  padding-bottom: 24px;
+  padding-left: 36px;
+}
+
+.textBox {
+  margin-bottom: 8px;
+}
+
+.textBox .textArea {
+  background-color: #f2f8fe;
+  border-color: gray;
+}
+
+.btnContainer {
+  display: flex;
+  gap: 4px;
+}
+
+.btnBox {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btnBox button {
+  height: 48px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: black;
+  background-color: #c7e1f9;
+  border-color: #c7e1f9;
+  border-radius: 16px;
+}
+
+.btnBox img {
+  width: 28px;
+}
