@@ -31,7 +31,7 @@ function Home() {
               현재 글자수: {letterCount} / 1000
             </div>
           </div>
-          <div className={styles.submitBtnBox}>
+          <div className={styles.btnBox}>
             <Button variant="primary" type="submit">
               <img src={submitIcon} alt="제출 아이콘" />
               제출하기
