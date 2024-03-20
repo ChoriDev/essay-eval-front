@@ -20,7 +20,7 @@ function Home() {
             <Form.Label>하단에 에세이를 입력해주세요.</Form.Label>
             <Form.Control
               className={styles.textArea}
-              as={"textarea"}
+              as="textarea"
               rows={15}
               maxLength={1000}
               onChange={changeLetterCount}
