@@ -21,7 +21,7 @@ function Home() {
             <Form.Control
               className={styles.textArea}
               as={"textarea"}
-              rows={13}
+              rows={15}
               maxLength={1000}
               onChange={changeLetterCount}
             />
