@@ -22,13 +22,13 @@ function Result() {
           </Form.Group>
           <div className={styles.btnContainer}>
             <div className={styles.btnBox}>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="button">
                 <img src={backIcon} alt="돌아가기 아이콘" />
                 다시 쓰기
               </Button>
             </div>
             <div className={styles.btnBox}>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="button">
                 <img src={printIcon} alt="출력 아이콘" />
                 결과 출력하기
               </Button>
