@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { save } from "../redux/slices/essay";
 import { Form, Button } from "react-bootstrap";
 import styles from "../css/Home.module.css";
@@ -9,12 +10,14 @@ import Navbars from "../components/Navbars";
 function Home() {
   const essay = useSelector((state) => state.essay);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [content, setContent] = useState(essay.content);
   const [letterCount, setLetterCount] = useState(0);
 
   const handleSumbit = () => {
     dispatch(save({ content }));
+    navigate("/result");
   };
 
   const handleTextArea = (e) => {
