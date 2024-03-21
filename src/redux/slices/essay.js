@@ -6,11 +6,11 @@ const essay = createSlice({
     content: "",
   },
   reducers: {
-    save: (state, action) => {
+    write: (state, action) => {
       state.content = action.payload.content;
     },
   },
 });
 
-export const { save } = essay.actions;
+export const { write } = essay.actions;
 export default essay.reducer;

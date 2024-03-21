@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { save } from "../redux/slices/essay";
+import { write } from "../redux/slices/essay";
 import { Form, Button } from "react-bootstrap";
 import styles from "../css/Home.module.css";
 import submitIcon from "../images/submitIcon.png";
@@ -16,7 +16,7 @@ function Home() {
   const [letterCount, setLetterCount] = useState(0);
 
   const handleSumbit = () => {
-    dispatch(save({ content }));
+    dispatch(write({ content }));
     navigate("/result");
   };
 
