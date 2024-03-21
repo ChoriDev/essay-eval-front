@@ -1,13 +1,24 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { save } from "../redux/slices/essay";
 import { Form, Button } from "react-bootstrap";
 import styles from "../css/Home.module.css";
 import submitIcon from "../images/submitIcon.png";
 import Navbars from "../components/Navbars";
 
 function Home() {
+  const essay = useSelector((state) => state.essay);
+  const dispatch = useDispatch();
+
+  const [content, setContent] = useState(essay.content);
   const [letterCount, setLetterCount] = useState(0);
 
-  const changeLetterCount = (e) => {
+  const handleSumbit = () => {
+    dispatch(save({ content }));
+  };
+
+  const handleTextArea = (e) => {
+    setContent(e.target.value);
     setLetterCount(e.target.value.length);
   };
 
@@ -21,9 +32,10 @@ function Home() {
             <Form.Control
               className={styles.textArea}
               as="textarea"
+              value={content}
               rows={15}
               maxLength={1000}
-              onChange={changeLetterCount}
+              onChange={handleTextArea}
             />
           </Form.Group>
           <div className={styles.letterCountBox}>
@@ -32,7 +44,7 @@ function Home() {
             </div>
           </div>
           <div className={styles.btnBox}>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" onClick={handleSumbit}>
               <img src={submitIcon} alt="제출 아이콘" />
               제출하기
             </Button>
