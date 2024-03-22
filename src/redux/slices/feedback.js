@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const feedback = createSlice({
   name: "feedback",
   initialState: {
-    content: "",
+    feedbackContent: "",
   },
   reducers: {
     evaluate: (state, action) => {
-      state.content = action.payload.content;
+      state.feedbackContent = action.payload.feedbackContent;
     },
   },
 });
