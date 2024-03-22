@@ -28,7 +28,7 @@ function Home() {
 
   useEffect(() => {
     if (responseData !== null) {
-      dispatch(evaluate({ feecbackContent: responseData.content }));
+      dispatch(evaluate({ feedbackContent: responseData.feedbackContent }));
       navigate(`/result`);
     }
   }, [responseData]);
