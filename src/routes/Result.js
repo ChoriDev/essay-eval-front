@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import { Form, Button } from "react-bootstrap";
 import Navbars from "../components/Navbars";
@@ -9,6 +10,7 @@ import printIcon from "../images/printIcon.png";
 
 function Result() {
   const feedback = useSelector((state) => state.feedback);
+  const navigate = useNavigate();
 
   const [feedbackContent, setFeedbackContent] = useState(
     feedback.feedbackContent
@@ -41,7 +43,13 @@ function Result() {
           </div>
           <div className={styles.btnContainer}>
             <div className={styles.btnBox}>
-              <Button variant="primary" type="button">
+              <Button
+                variant="primary"
+                type="button"
+                onClick={() => {
+                  navigate(`/`);
+                }}
+              >
                 <img src={backIcon} alt="돌아가기 아이콘" />
                 다시 쓰기
               </Button>
