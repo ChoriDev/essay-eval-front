@@ -15,7 +15,7 @@ function Home() {
   const essay = useSelector((state) => state.essay);
 
   const [essayContent, setEssayContent] = useState(essay.essayContent);
-  const [letterCount, setLetterCount] = useState(0);
+  const [letterCount, setLetterCount] = useState(essayContent.length);
 
   // 물품 하나 추가
   const { responseData, error, isLoading, request } = useAxios({
