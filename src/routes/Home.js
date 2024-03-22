@@ -1,13 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { write } from "../redux/slices/essay";
+import { evaluate } from "../redux/slices/feedback";
+import useAxios from "../hooks/useAxios";
 import { Form, Button } from "react-bootstrap";
 import styles from "../css/Home.module.css";
 import submitIcon from "../images/submitIcon.png";
 import Navbars from "../components/Navbars";
 
 function Home() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const essay = useSelector((state) => state.essay);
+
+  const [essayContent, setEssayContent] = useState(essay.essayContent);
   const [letterCount, setLetterCount] = useState(0);
 
-  const changeLetterCount = (e) => {
+  // 물품 하나 추가
+  const { responseData, error, isLoading, request } = useAxios({
+    method: "POST",
+    url: `api/result/`,
+    requestData: {
+      essayContent,
+    },
+  });
+
+  useEffect(() => {
+    if (responseData !== null) {
+      dispatch(evaluate({ feedbackContent: responseData.feedbackContent }));
+      navigate(`/result`);
+    }
+  }, [responseData]);
+
+  const handleSumbit = () => {
+    dispatch(write({ essayContent }));
+    request();
+  };
+
+  const handleTextArea = (e) => {
+    setEssayContent(e.target.value);
     setLetterCount(e.target.value.length);
   };
 
@@ -21,9 +53,10 @@ function Home() {
             <Form.Control
               className={styles.textArea}
               as="textarea"
+              value={essayContent}
               rows={15}
               maxLength={1000}
-              onChange={changeLetterCount}
+              onChange={handleTextArea}
             />
           </Form.Group>
           <div className={styles.letterCountBox}>
@@ -32,7 +65,7 @@ function Home() {
             </div>
           </div>
           <div className={styles.btnBox}>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" onClick={handleSumbit}>
               <img src={submitIcon} alt="제출 아이콘" />
               제출하기
             </Button>
