@@ -3,14 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const essay = createSlice({
   name: "essay",
   initialState: {
-    essayContent: "",
+    content: "",
+    feedback: "",
   },
   reducers: {
     write: (state, action) => {
-      state.essayContent = action.payload.essayContent;
+      state.content = action.payload.content;
+    },
+    evaluate: (state, action) => {
+      state.feedback = action.payload.feedback;
     },
   },
 });
 
-export const { write } = essay.actions;
+export const { write, evaluate } = essay.actions;
 export default essay.reducer;

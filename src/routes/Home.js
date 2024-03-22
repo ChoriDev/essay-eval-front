@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { write } from "../redux/slices/essay";
-import { evaluate } from "../redux/slices/feedback";
+import { write, evaluate } from "../redux/slices/essay";
 import useAxios from "../hooks/useAxios";
 import { Form, Button } from "react-bootstrap";
 import styles from "../css/Home.module.css";
@@ -14,32 +13,32 @@ function Home() {
   const dispatch = useDispatch();
   const essay = useSelector((state) => state.essay);
 
-  const [essayContent, setEssayContent] = useState(essay.essayContent);
-  const [letterCount, setLetterCount] = useState(essayContent.length);
+  const [content, setContent] = useState(essay.content);
+  const [letterCount, setLetterCount] = useState(content.length);
 
   // 물품 하나 추가
   const { responseData, error, isLoading, request } = useAxios({
     method: "POST",
     url: `api/result/`,
     requestData: {
-      essayContent,
+      content,
     },
   });
 
   useEffect(() => {
     if (responseData !== null) {
-      dispatch(evaluate({ feedbackContent: responseData.feedbackContent }));
+      dispatch(evaluate({ feedback: responseData.feedback }));
       navigate(`/result`);
     }
   }, [responseData]);
 
   const handleSumbit = () => {
-    dispatch(write({ essayContent }));
+    dispatch(write({ content }));
     request();
   };
 
   const handleTextArea = (e) => {
-    setEssayContent(e.target.value);
+    setContent(e.target.value);
     setLetterCount(e.target.value.length);
   };
 
@@ -53,7 +52,7 @@ function Home() {
             <Form.Control
               className={styles.textArea}
               as="textarea"
-              value={essayContent}
+              value={content}
               rows={15}
               maxLength={1000}
               onChange={handleTextArea}
