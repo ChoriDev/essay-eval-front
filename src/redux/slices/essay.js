@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const essay = createSlice({
   name: "essay",
   initialState: {
-    content: "",
+    essayContent: "",
   },
   reducers: {
     write: (state, action) => {
-      state.content = action.payload.content;
+      state.essayContent = action.payload.essayContent;
     },
   },
 });
