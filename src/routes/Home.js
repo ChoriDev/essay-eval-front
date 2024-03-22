@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { write } from "../redux/slices/essay";
-import { evaluate } from "../redux/slices/essay";
+import { evaluate } from "../redux/slices/feedback";
+import useAxios from "../hooks/useAxios";
 import { Form, Button } from "react-bootstrap";
 import styles from "../css/Home.module.css";
 import submitIcon from "../images/submitIcon.png";
@@ -12,15 +13,29 @@ function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const essay = useSelector((state) => state.essay);
-  const feedback = useSelector((state) => state.feedback);
 
-  const [essayContent, setEssayContent] = useState(essay.content);
-  const [feedbackContent, setFeedbackContent] = useState(feedback.content);
+  const [essayContent, setEssayContent] = useState(essay.essayContent);
   const [letterCount, setLetterCount] = useState(0);
+
+  // 물품 하나 추가
+  const { responseData, error, isLoading, request } = useAxios({
+    method: "POST",
+    url: `api/result/`,
+    requestData: {
+      essayContent,
+    },
+  });
+
+  useEffect(() => {
+    if (responseData !== null) {
+      dispatch(evaluate({ feecbackContent: responseData.content }));
+      navigate(`/result`);
+    }
+  }, [responseData]);
 
   const handleSumbit = () => {
     dispatch(write({ essayContent }));
-    navigate("/result");
+    request();
   };
 
   const handleTextArea = (e) => {
