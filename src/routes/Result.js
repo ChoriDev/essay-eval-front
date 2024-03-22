@@ -9,12 +9,10 @@ import backIcon from "../images/backIcon.png";
 import printIcon from "../images/printIcon.png";
 
 function Result() {
-  const feedback = useSelector((state) => state.feedback);
+  const essay = useSelector((state) => state.essay);
   const navigate = useNavigate();
 
-  const [feedbackContent, setFeedbackContent] = useState(
-    feedback.feedbackContent
-  );
+  const [feedback, setFeedback] = useState(essay.feedback);
 
   const componentRef = useRef();
 
@@ -34,7 +32,7 @@ function Result() {
               <Form.Control
                 className={styles.textArea}
                 as="textarea"
-                value={feedbackContent}
+                value={feedback}
                 rows={15}
                 maxLength={1000}
                 readOnly
