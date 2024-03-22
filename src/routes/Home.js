@@ -2,17 +2,20 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { write } from "../redux/slices/essay";
+import { evaluate } from "../redux/slices/essay";
 import { Form, Button } from "react-bootstrap";
 import styles from "../css/Home.module.css";
 import submitIcon from "../images/submitIcon.png";
 import Navbars from "../components/Navbars";
 
 function Home() {
-  const essay = useSelector((state) => state.essay);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const essay = useSelector((state) => state.essay);
+  const feedback = useSelector((state) => state.feedback);
 
   const [essayContent, setEssayContent] = useState(essay.content);
+  const [feedbackContent, setFeedbackContent] = useState(feedback.content);
   const [letterCount, setLetterCount] = useState(0);
 
   const handleSumbit = () => {
