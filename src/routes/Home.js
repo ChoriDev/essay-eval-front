@@ -12,16 +12,16 @@ function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [content, setContent] = useState(essay.content);
+  const [essayContent, setEssayContent] = useState(essay.content);
   const [letterCount, setLetterCount] = useState(0);
 
   const handleSumbit = () => {
-    dispatch(write({ content }));
+    dispatch(write({ essayContent }));
     navigate("/result");
   };
 
   const handleTextArea = (e) => {
-    setContent(e.target.value);
+    setEssayContent(e.target.value);
     setLetterCount(e.target.value.length);
   };
 
@@ -35,7 +35,7 @@ function Home() {
             <Form.Control
               className={styles.textArea}
               as="textarea"
-              value={content}
+              value={essayContent}
               rows={15}
               maxLength={1000}
               onChange={handleTextArea}
