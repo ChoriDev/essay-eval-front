@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { useReactToPrint } from "react-to-print";
 import { Form, Button } from "react-bootstrap";
 import Navbars from "../components/Navbars";
@@ -7,6 +8,12 @@ import backIcon from "../images/backIcon.png";
 import printIcon from "../images/printIcon.png";
 
 function Result() {
+  const feedback = useSelector((state) => state.feedback);
+
+  const [feedbackContent, setFeedbackContent] = useState(
+    feedback.feedbackContent
+  );
+
   const componentRef = useRef();
 
   const handlePrint = useReactToPrint({
@@ -25,6 +32,7 @@ function Result() {
               <Form.Control
                 className={styles.textArea}
                 as="textarea"
+                value={feedbackContent}
                 rows={15}
                 maxLength={1000}
                 readOnly
