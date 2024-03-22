@@ -6,7 +6,7 @@ const feedback = createSlice({
     content: "",
   },
   reducers: {
-    write: (state, action) => {
+    evaluate: (state, action) => {
       state.content = action.payload.content;
     },
   },
