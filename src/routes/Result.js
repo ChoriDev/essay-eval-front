@@ -12,7 +12,7 @@ function Result() {
   const essay = useSelector((state) => state.essay);
   const navigate = useNavigate();
 
-  const [feedback, setFeedback] = useState(essay.feedback);
+  const [correctedText, setCorrectedText] = useState(essay.correctedText);
 
   const componentRef = useRef();
 
@@ -32,7 +32,7 @@ function Result() {
               <Form.Control
                 className={styles.textArea}
                 as="textarea"
-                value={feedback}
+                value={correctedText}
                 rows={15}
                 maxLength={1000}
                 readOnly

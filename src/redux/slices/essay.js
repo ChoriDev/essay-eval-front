@@ -3,15 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const essay = createSlice({
   name: "essay",
   initialState: {
-    content: "",
-    feedback: "",
+    originalText: "",
+    correctedText: "",
   },
   reducers: {
     write: (state, action) => {
-      state.content = action.payload.content;
+      state.originalText = action.payload.originalText;
     },
     evaluate: (state, action) => {
-      state.feedback = action.payload.feedback;
+      state.correctedText = action.payload.correctedText;
     },
   },
 });

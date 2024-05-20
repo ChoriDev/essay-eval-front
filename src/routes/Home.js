@@ -13,32 +13,32 @@ function Home() {
   const dispatch = useDispatch();
   const essay = useSelector((state) => state.essay);
 
-  const [content, setContent] = useState(essay.content);
-  const [letterCount, setLetterCount] = useState(content.length);
+  const [originalText, setOriginalText] = useState(essay.originalText);
+  const [letterCount, setLetterCount] = useState(originalText.length);
 
   // 물품 하나 추가
   const { responseData, error, isLoading, request } = useAxios({
     method: "POST",
     url: `api/result/`,
     requestData: {
-      content,
+      original_text: originalText,
     },
   });
 
   useEffect(() => {
     if (responseData !== null) {
-      dispatch(evaluate({ feedback: responseData.feedback }));
+      dispatch(evaluate({ correctedText: responseData.corrected_text }));
       navigate(`/result`);
     }
   }, [responseData]);
 
   const handleSumbit = () => {
-    dispatch(write({ content }));
+    dispatch(write({ originalText }));
     request();
   };
 
   const handleTextArea = (e) => {
-    setContent(e.target.value);
+    setOriginalText(e.target.value);
     setLetterCount(e.target.value.length);
   };
 
@@ -52,7 +52,7 @@ function Home() {
             <Form.Control
               className={styles.textArea}
               as="textarea"
-              value={content}
+              value={originalText}
               rows={15}
               maxLength={1000}
               onChange={handleTextArea}
