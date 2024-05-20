@@ -16,19 +16,18 @@ function Home() {
   const [content, setContent] = useState(essay.content);
   const [letterCount, setLetterCount] = useState(content.length);
 
-  // 물품 하나 추가
   const { responseData, error, isLoading, request } = useAxios({
     method: "POST",
     url: `api/result/`,
     requestData: {
-      content,
+      "content":content,
     },
   });
 
   useEffect(() => {
     if (responseData !== null) {
       dispatch(evaluate({ feedback: responseData.feedback }));
-      navigate(`/result`);
+      navigate(`/result/`);
     }
   }, [responseData]);
 

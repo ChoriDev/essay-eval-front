@@ -1,20 +1,38 @@
-import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
 import { Form, Button } from "react-bootstrap";
+import { write, evaluate } from "../redux/slices/essay";
 import Navbars from "../components/Navbars";
+import useAxios from "../hooks/useAxios";
 import styles from "../css/Result.module.css";
 import backIcon from "../images/backIcon.png";
 import printIcon from "../images/printIcon.png";
 
 function Result() {
-  const essay = useSelector((state) => state.essay);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const essay = useSelector((state) => state.essay);
 
   const [feedback, setFeedback] = useState(essay.feedback);
 
   const componentRef = useRef();
+
+  const { responseData, error, isLoading, request } = useAxios({
+    method: "GET",
+    url: `api/result/`,
+  });
+
+  useEffect(() => {
+    if (responseData !== null) {
+      setFeedback(responseData.feedback);
+      dispatch(evaluate({ feedback: responseData.feedback }));
+      navigate(`/result`);
+    }
+  }, [responseData, dispatch, navigate]);
+
+
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
