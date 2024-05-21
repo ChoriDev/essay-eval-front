@@ -16,7 +16,6 @@ function Home() {
   const [originalText, setOriginalText] = useState(essay.originalText);
   const [letterCount, setLetterCount] = useState(originalText.length);
 
-  // 물품 하나 추가
   const { responseData, error, isLoading, request } = useAxios({
     method: "POST",
     url: `api/result/`,
@@ -27,7 +26,10 @@ function Home() {
 
   useEffect(() => {
     if (responseData !== null) {
-      dispatch(evaluate({ correctedText: responseData.corrected_text }));
+      dispatch(evaluate({correctedText: responseData.corrected_text,
+          wrongSpelling: responseData.wrong_spelling,
+          wrongSpacing: responseData.wrong_spacing
+        }));
       navigate(`/result`);
     }
   }, [responseData]);

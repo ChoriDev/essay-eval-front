@@ -5,6 +5,8 @@ const essay = createSlice({
   initialState: {
     originalText: "",
     correctedText: "",
+    wrongSpelling: [],
+    wrongSpacing: [],
   },
   reducers: {
     write: (state, action) => {
@@ -12,6 +14,8 @@ const essay = createSlice({
     },
     evaluate: (state, action) => {
       state.correctedText = action.payload.correctedText;
+      state.wrongSpelling = action.payload.wrongSpelling;
+      state.wrongSpacing = action.payload.wrongSpacing;
     },
   },
 });

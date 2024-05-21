@@ -13,6 +13,8 @@ function Result() {
   const navigate = useNavigate();
 
   const [correctedText, setCorrectedText] = useState(essay.correctedText);
+  const [wrongSpelling, setWrongSpelling] = useState(essay.wrongSpelling);
+  const [wrongSpacing, setWrongSpacing] = useState(essay.wrongSpacing);
 
   const componentRef = useRef();
 
@@ -34,7 +36,26 @@ function Result() {
                 as="textarea"
                 value={correctedText}
                 rows={15}
-                maxLength={1000}
+                readOnly
+              />
+            </Form.Group>
+            <Form.Group className={styles.textBox}>
+              <Form.Label>교정된 맞춤법</Form.Label>
+              <Form.Control
+                className={styles.textArea}
+                as="textarea"
+                value={wrongSpelling}
+                rows={2}
+                readOnly
+              />
+            </Form.Group>
+            <Form.Group className={styles.textBox}>
+              <Form.Label>교정된 띄어쓰기</Form.Label>
+              <Form.Control
+                className={styles.textArea}
+                as="textarea"
+                value={wrongSpacing}
+                rows={2}
                 readOnly
               />
             </Form.Group>
