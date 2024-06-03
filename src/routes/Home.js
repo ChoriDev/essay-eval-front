@@ -26,9 +26,12 @@ function Home() {
 
   useEffect(() => {
     if (responseData !== null) {
-      dispatch(evaluate({correctedText: responseData.corrected_text,
+      dispatch(evaluate({
+          correctedText: responseData.corrected_text,
           wrongSpelling: responseData.wrong_spelling,
-          wrongSpacing: responseData.wrong_spacing
+          wrongSpacing: responseData.wrong_spacing,
+          org3Score: responseData.org3_score,
+          org3Comment: responseData.org3_comment
         }));
       navigate(`/result`);
     }

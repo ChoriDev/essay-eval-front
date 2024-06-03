@@ -15,6 +15,8 @@ function Result() {
   const [correctedText, setCorrectedText] = useState(essay.correctedText);
   const [wrongSpelling, setWrongSpelling] = useState(essay.wrongSpelling);
   const [wrongSpacing, setWrongSpacing] = useState(essay.wrongSpacing);
+  const [org3Score, setOrg3Score] = useState(essay.org3Score);
+  const [org3Comment, setOrg3Comment] = useState(essay.org3Comment);
 
   const componentRef = useRef();
 
@@ -34,7 +36,7 @@ function Result() {
               <Form.Control
                 className={styles.textArea}
                 as="textarea"
-                value={correctedText}
+                value={`${correctedText}\n\n구조의 일관성: ${org3Score}\n${org3Comment}`}
                 rows={15}
                 readOnly
               />
