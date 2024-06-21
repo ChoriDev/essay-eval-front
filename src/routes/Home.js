@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { write, evaluate } from "../redux/slices/essay";
 import useAxios from "../hooks/useAxios";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Modal, Spinner } from "react-bootstrap";
 import styles from "../css/Home.module.css";
 import submitIcon from "../images/submitIcon.png";
 import Navbars from "../components/Navbars";
@@ -15,6 +15,7 @@ function Home() {
 
   const [originalText, setOriginalText] = useState(essay.originalText);
   const [letterCount, setLetterCount] = useState(originalText.length);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { responseData, error, isLoading, request } = useAxios({
     method: "POST",
@@ -25,20 +26,37 @@ function Home() {
   });
 
   useEffect(() => {
+    if (isLoading) {
+      setIsModalVisible(false);
+    } else {
+      setIsModalVisible(true);
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
     if (responseData !== null) {
       dispatch(evaluate({
-          correctedText: responseData.corrected_text,
-          wrongSpelling: responseData.wrong_spelling,
-          wrongSpacing: responseData.wrong_spacing,
-          org3Score: responseData.org3_score,
-          org3Comment: responseData.org3_comment
-        }));
+        correctedText: responseData.corrected_text,
+        wrongSpelling: responseData.wrong_spelling,
+        wrongSpacing: responseData.wrong_spacing,
+        cont1Score: responseData.cont1_score,
+        cont1Comment: responseData.cont1_comment,
+        cont2Score: responseData.cont2_score,
+        cont2Comment: responseData.cont2_comment,
+        exp2Score: responseData.exp2_score,
+        exp2Comment: responseData.exp2_comment,
+        exp3Score: responseData.exp3_score,
+        exp3Comment: responseData.exp3_comment,
+        org3Score: responseData.org3_score,
+        org3Comment: responseData.org3_comment
+      }));
       navigate(`/result`);
     }
   }, [responseData]);
 
-  const handleSumbit = () => {
+  const handleSubmit = () => {
     dispatch(write({ originalText }));
+    setIsModalVisible(true);
     request();
   };
 
@@ -69,13 +87,22 @@ function Home() {
             </div>
           </div>
           <div className={styles.btnBox}>
-            <Button variant="primary" onClick={handleSumbit}>
+            <Button variant="primary" onClick={handleSubmit}>
               <img src={submitIcon} alt="제출 아이콘" />
               제출하기
             </Button>
           </div>
         </Form>
       </div>
+
+      <Modal show={isModalVisible} backdrop="static" keyboard={false} centered>
+        <Modal.Body className={styles.modalBody}>
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+          <p className={styles.loadingNotice}>채점 중입니다. 잠시만 기다려 주세요...</p>
+        </Modal.Body>
+      </Modal>
     </>
   );
 }

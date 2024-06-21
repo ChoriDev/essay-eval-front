@@ -15,6 +15,14 @@ function Result() {
   const [correctedText, setCorrectedText] = useState(essay.correctedText);
   const [wrongSpelling, setWrongSpelling] = useState(essay.wrongSpelling);
   const [wrongSpacing, setWrongSpacing] = useState(essay.wrongSpacing);
+  const [cont1Score, setCont1Score] = useState(essay.cont1Score);
+  const [cont1Comment, setCont1Comment] = useState(essay.cont1Comment);
+  const [cont2Score, setCont2Score] = useState(essay.cont2Score);
+  const [cont2Comment, setCont2Comment] = useState(essay.cont2Comment);
+  const [exp2Score, setExp2Score] = useState(essay.exp2Score);
+  const [exp2Comment, setExp2Comment] = useState(essay.exp2Comment);
+  const [exp3Score, setExp3Score] = useState(essay.exp3Score);
+  const [exp3Comment, setExp3Comment] = useState(essay.exp3Comment);
   const [org3Score, setOrg3Score] = useState(essay.org3Score);
   const [org3Comment, setOrg3Comment] = useState(essay.org3Comment);
 
@@ -36,7 +44,12 @@ function Result() {
               <Form.Control
                 className={styles.textArea}
                 as="textarea"
-                value={`${correctedText}\n\n구조의 일관성: ${org3Score}\n${org3Comment}`}
+                value={`${correctedText}
+                  \n주제의 명료성: ${cont1Score}\n${cont1Comment}
+                  \n근거의 적절성: ${cont2Score}\n${cont2Comment}
+                  \n단어 사용의 적절성: ${exp2Score}\n${exp2Comment}
+                  \n문장 표현의 적절성: ${exp3Score}\n${exp3Comment}
+                  \n구조의 일관성: ${org3Score}\n${org3Comment}`}
                 rows={15}
                 readOnly
               />

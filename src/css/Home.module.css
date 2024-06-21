@@ -44,3 +44,14 @@
 .btnBox img {
   width: 48px;
 }
+
+.modalBody {
+  display: flex;
+  align-items: center;
+}
+
+.loadingNotice {
+  font-size: 16px;
+  text-align: center;
+  margin: 8px;
+}
